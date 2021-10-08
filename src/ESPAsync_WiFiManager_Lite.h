@@ -47,6 +47,7 @@
   #include <ESP8266WiFi.h>
   #include <ESP8266WiFiMulti.h>
   #include <ESPAsyncWebServer.h>
+  #include <AsyncElegantOTA.h>
   
   //default to use EEPROM, otherwise, use LittleFS or SPIFFS
   #if ( USE_LITTLEFS || USE_SPIFFS )
@@ -2643,6 +2644,7 @@ class ESPAsync_WiFiManager_Lite
       if (server)
       {
         server->on("/", HTTP_GET, [this](AsyncWebServerRequest * request)  { handleRequest(request); });        
+        AsyncElegantOTA.begin(server);
         server->begin();
       }
 
